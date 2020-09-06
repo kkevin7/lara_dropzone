@@ -22,3 +22,7 @@ Route::post('dropzone/upload', 'DropzoneController@upload')->name('dropzone.uplo
 Route::get('dropzone/fetch', 'DropzoneController@fetch')->name('dropzone.fetch');
 
 Route::get('dropzone/delete', 'DropzoneController@delete')->name('dropzone.delete');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
