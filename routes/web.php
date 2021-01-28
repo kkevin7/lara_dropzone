@@ -16,12 +16,14 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', 'DropzoneController@index');
 
 Route::get('dropzone', 'DropzoneController@index');
-
 Route::post('dropzone/upload', 'DropzoneController@upload')->name('dropzone.upload');
-
+Route::post('dropzone/upload2', 'DropzoneController@upload_chucks')->name('dropzone.upload2');
 Route::get('dropzone/fetch', 'DropzoneController@fetch')->name('dropzone.fetch');
-
 Route::get('dropzone/delete', 'DropzoneController@delete')->name('dropzone.delete');
+
+Route::prefix('/chucks')->group(function () {
+    Route::post('/upload', 'ChuckUploadController@upload')->name('chucks.upload');
+});
 
 Auth::routes();
 

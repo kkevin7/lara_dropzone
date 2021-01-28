@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+// use Illuminate\Support\Facades\File;
 
 class DropzoneController extends Controller
 {
@@ -10,6 +11,42 @@ class DropzoneController extends Controller
     {
      return view('dropzone');
     }
+
+    public function upload_chucks(Request $request)
+    {
+        $file = $request->file('file');
+
+        // $path = \Storage::disk('uploads')->path("chunks/{$file->getClientOriginalName()}");
+        $path = public_path("images/{$file->getClientOriginalName()}");
+
+        \File::append($path, $file->get());
+
+        // if ($request->has('is_last') && $request->boolean('is_last')) {
+        //     $name = basename($path, '.part');
+
+        //     File::move($path, $name);
+        // }
+
+        return response()->json(['uploaded' => true]);
+    }
+    // public function upload_chucks(Request $request)
+    // {
+    //     $file = $request->file('file');
+
+    //     $path = \Storage::disk('uploads')->path("chunks/{$file->getClientOriginalName()}");
+    //     // public_path("images/{$file->getClientOriginalName()}")
+
+    //     \File::append($path, $file->get());
+
+    //     if ($request->has('is_last') && $request->boolean('is_last')) {
+    //         $name = basename($path, '.part');
+
+    //         File::move($path, "/path/to/public/someid/{$name}");
+    //     }
+
+    //     return response()->json(['uploaded' => true]);
+    // }
+
 
     function upload(Request $request)
     {

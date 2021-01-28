@@ -11,7 +11,7 @@
         <h3 class="panel-title">Select Image</h3>
       </div>
       <div class="panel-body">
-        <form id="dropzoneForm" class="dropzone" action="{{ route('dropzone.upload') }}">
+        <form id="dropzoneForm" class="dropzone" action="{{ route('chucks.upload') }}">
           @csrf
         </form>
         <div class="mt-3 text-center">
@@ -34,8 +34,14 @@
 @section('scripts')
 <script type="text/javascript">
     Dropzone.options.dropzoneForm = {
-      autoProcessQueue : false,
-      acceptedFiles : ".png,.jpg,.gif,.bmp,.jpeg",
+        autoProcessQueue : false,
+        // parallelUploads: 1,
+        chunking: true,
+        forceChunking: true,
+        chunkSize: 1000000,
+        parallelChunkUploads: true,
+        retryChunks: true,
+        retryChunksLimit: 3,
 
       init:function(){
         var submitButton = document.querySelector("#submit-all");
